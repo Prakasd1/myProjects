@@ -20,6 +20,9 @@ public class LoginPage extends basePage{
 	@FindBy (xpath = "//button[normalize-space()='Login']")
 	WebElement btn_login;
 	
+	@FindBy(id = "alert")
+	WebElement errAlert;
+	
 	public void set_Email(String email)
 	{
 		txt_email.sendKeys(email);
@@ -31,6 +34,16 @@ public class LoginPage extends basePage{
 	
 	public void click_Login() {
 		btn_login.click();
+	}
+	
+	
+
+	public String alertMsg() {
+		try {
+			return (errAlert.getText());
+		} catch(Exception e) {
+			return (e.getMessage());
+		}
 	}
 	
 	

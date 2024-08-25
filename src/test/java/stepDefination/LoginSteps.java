@@ -48,5 +48,23 @@ public class LoginSteps {
 			Assert.fail();
 		}
 	}
+	
+	@Then("I should see an error message informing the User about invalid credentials")
+	public void i_should_see_an_error_message_informing_the_user_about_invalid_credentials() throws InterruptedException {
+	    
+		Thread.sleep(2000);
+		String textMsg = lp.alertMsg();
+		System.out.println(textMsg);
+		Assert.assertEquals(textMsg, "Warning: No match for E-Mail Address and/or Password.");
+	}
+	
+	@When("User leave the field as blank")
+	public void user_leave_the_field_as_blank() throws InterruptedException {
+	    
+		
+		Thread.sleep(1000);
+		lp = new LoginPage(baseclass.getDriver());
+		lp.click_Login();
+	}
 
 }

@@ -32,6 +32,25 @@ public class RegistrationPage extends basePage {
 	@FindBy (xpath = "//button[normalize-space()='Continue']")
 	WebElement btn_continue;
 	
+	@FindBy (xpath = "(//a[contains(text(),'Register')])[2]")
+	WebElement text_register;
+	//=====
+	@FindBy (css =".alert.alert-danger.alert-dismissible")
+	WebElement warn_privecy;
+	
+	@FindBy (xpath = "//div[@id='error-firstname']")
+	WebElement warn_firstname;
+	
+	@FindBy(xpath = "//div[@id='error-lastname']")
+	WebElement warn_lastName;
+	
+	@FindBy (xpath = "//div[@id='error-email']")
+	WebElement warn_email;
+	
+	@FindBy (xpath = "//div[@id='error-password']")
+	WebElement warn_password;
+	
+	
 	public void firstName_txt(String fname) {
 		txt_firstName.sendKeys(fname);
 	}
@@ -60,6 +79,44 @@ public class RegistrationPage extends basePage {
 		btn_continue.click();
 	}
 	
+	public boolean register_success() {
+		try {
+		return(text_register.isDisplayed());
+		} catch (Exception e){
+			return(false);
+		}
+	}
+	
+	public String warn_PrivacyPolicymsg() {
+		
+		try { return(warn_privecy.getText());}
+		catch(Exception e) { return(e.getMessage()); }
+	}
+	
+	public String warn_firstNamemsg() {
+		
+		try { return(warn_firstname.getText());}
+		catch(Exception e) { return(e.getMessage()); }
+	}
+	
+	public String warn_lastNamemsg() {
+		
+		try { return(warn_lastName.getText());}
+		catch(Exception e) { return(e.getMessage()); }
+	}
+	
+	public String warn_emailmsg() {
+		
+		try { return(warn_email.getText());}
+		catch(Exception e) { return(e.getMessage()); }
+	}
+	
+	public String warn_passwordmsg() {
+		
+		try { return(warn_password.getText());}
+		catch(Exception e) { return(e.getMessage()); }
+	}
+
 	
 	
 	

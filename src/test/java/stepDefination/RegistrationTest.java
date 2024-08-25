@@ -58,18 +58,21 @@ public class RegistrationTest {
 	public void click_on_subscribe_button() throws InterruptedException {
 		Thread.sleep(3000);
 		JavascriptExecutor js = (JavascriptExecutor)baseclass.getDriver();
-		js.executeScript("window.scrollBy(0, 300)");
+		js.executeScript("window.scrollBy(0, 400)");
 		regPage.newsletter_btn();
 	}
 	
 	@When("Click on Privacy Policy button")
 	public void click_on_privacy_policy_button() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		regPage.privacyPolicy_btn();
 	}
 	
 	@When("Click on Continue button")
-	public void click_on_continue_button() {
+	public void Click_on_continue_button() throws InterruptedException {
+		JavascriptExecutor js = (JavascriptExecutor)baseclass.getDriver();
+		js.executeScript("window.scrollBy(0, 300)");
+		Thread.sleep(4000);
 		regPage.btn_continue();
 	}
 	
@@ -95,6 +98,42 @@ public class RegistrationTest {
 			Assert.fail();
 		}
 
+	}
+	
+	
+	@Then("User Account should not created")
+	public void user_account_should_not_created() {
+	    try {
+		boolean btn_register = regPage.register_success();
+		Assert.assertEquals(btn_register, true);}
+		catch(Exception e)
+		{
+			Assert.fail();
+		}
+	}
+	
+	
+	
+	@Then("User should see the error messages")
+	public void user_should_see_the_error_messages() {
+		
+		String PrivacyPolicy = regPage.warn_PrivacyPolicymsg();
+		Assert.assertEquals(PrivacyPolicy, "Warning: You must agree to the Privacy Policy!");
+		
+		String First_name = regPage.warn_firstNamemsg();
+		Assert.assertEquals(First_name, "First Name must be between 1 and 32 characters!");
+		
+		String Last_name = regPage.warn_lastNamemsg();
+		Assert.assertEquals(Last_name, "Last Name must be between 1 and 32 characters!");
+			
+		String Password = regPage.warn_passwordmsg();
+		Assert.assertEquals(Password, "Password must be between 4 and 20 characters!");
+		
+		String Email = regPage.warn_emailmsg();
+		Assert.assertEquals(Email, "E-Mail Address does not appear to be valid!");
+		
+		
+		
 	}
 	
 	
