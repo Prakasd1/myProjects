@@ -1,6 +1,9 @@
 package stepDefination;
 
+import java.util.List;
+
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import Factory.baseclass;
@@ -45,6 +48,26 @@ public class SearchStep {
 		sp = new SearchresultPage(baseclass.getDriver());
 		String errorMessage = sp.ErrorMsgDisplayed();
 		Assert.assertEquals(errorMessage, "There is no product that matches the search criteria.");
+	}
+	
+	@Then("Valdate the exact product named with {string}")
+	public void valdate_the_exact_product_named_with(String productName) {
+		
+		sp = new SearchresultPage(baseclass.getDriver());
+		List<String> productNames = sp.getProductNames();
+        System.out.println("Product Names: " + productNames);
+        boolean isPresent = sp.isProductPresent(productName);
+        Assert.assertTrue("Product " + productName + " is not present in the list", isPresent);
+    
+	    
+	}
+
+	@Then("Add the product to cart page with product name {string}")
+	public void add_the_product_to_cart_page_with_product_name(String productName) {
+		
+		sp = new SearchresultPage(baseclass.getDriver());
+		sp.clickProductByName(productName);
+		
 	}
 
 }

@@ -6,16 +6,16 @@ import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-				features = {".//FeatureFiles/"},
+				//features = {".//FeatureFiles/"},
 				//features = {".//FeatureFiles/Login.feature"},
-				//features = {".//FeatureFiles/Search.feature"},
+				features = {".//FeatureFiles/Search.feature"},
 				glue = "stepDefination",
 				plugin= {"pretty", "html:reports/myreport.html", 
 								  "rerun:target/rerun.txt",
 								  //"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 				},		  
-				dryRun=false
-				//tags = "@Login"
+				dryRun=false,
+				tags = "@Three"
 				)
 	
 
